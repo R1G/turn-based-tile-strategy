@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-//Note: For pathfinding in the future, it might be a good idea to have a pathfinding interface that all units implement
-//The pathfinding could get pretty complicated eventually, so it might be good to keep it seperate
+// Note: For pathfinding in the future, it might be a good idea to have a pathfinding interface that all units implement
+// The pathfinding could get pretty complicated eventually, so it might be good to keep it seperate
 
 public class MasterEnemyScript : MonoBehaviour {
 	
@@ -59,7 +59,7 @@ public class MasterEnemyScript : MonoBehaviour {
 		if (GameScript.turn == "EnemyTurn") {
 			findShortestDistance();
 			Vector3 movement = determineDirection();
-			//The enemy unit will not move if adjacent to it's target's position
+			// The enemy unit will not move if adjacent to it's target's position
 			if(gameObject.transform.position.x > (targetPosX + 1) || gameObject.transform.position.x < (targetPosX - 1) 
 			   || gameObject.transform.position.z > (targetPosZ + 1) || gameObject.transform.position.z < (targetPosZ - 1)) {
 				transform.Translate(movement);
@@ -78,9 +78,9 @@ public class MasterEnemyScript : MonoBehaviour {
 			}
 		}
 	}
-	//This method maps the identifier of a friendly troop (it's name) to it's position
-	//This allows an enemy to determine the closest troop to attack
-	//Later we can add more information to the identifier, to, for example, determine the different between archers and melee
+	// This method maps the identifier of a friendly troop (it's name) to it's position
+	// This allows an enemy to determine the closest troop to attack
+	// Later we can add more information to the identifier, to, for example, determine the different between archers and melee
 	public static void addFriendlyPos(string identifier, Vector3 pos) {
 		if (troopPosMap.ContainsKey (identifier) == true) {
 			troopPosMap.Remove (identifier);
@@ -99,8 +99,8 @@ public class MasterEnemyScript : MonoBehaviour {
 		targetPosZ = smallestPos.z;
 	}
 
-	//This determines which way the enemy should move
-	//The unit has to move different depending on whether it's target is behind them, in front of them, diagonal to them, etc.
+	// This determines which way the enemy should move
+	// The unit has to move different depending on whether it's target is behind them, in front of them, diagonal to them, etc.
 	private Vector3 determineDirection() {		
 
 		if (gameObject.transform.position.x < targetPosX && gameObject.transform.position.z < targetPosZ) {
