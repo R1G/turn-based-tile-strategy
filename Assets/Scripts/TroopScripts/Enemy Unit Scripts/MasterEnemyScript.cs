@@ -26,7 +26,7 @@ public class MasterEnemyScript : MonoBehaviour {
 	private static Dictionary<string, Vector3> troopPosMap = new Dictionary<string, Vector3>();
 
 	public virtual void Start() {
-		nEnemies = 5;
+		nEnemies = GameObject.FindGameObjectsWithTag("EnemyTroop").Length;
 		nMoved = 0;
 	}
 
@@ -64,15 +64,21 @@ public class MasterEnemyScript : MonoBehaviour {
 		findShortestDistance();
 		Vector3 movement = determineDirection();
 		Vector3 enemyPos = gameObject.transform.position;
+
 		//The enemy unit will not move if adjacent to it's target's position
+		//Do you think distance() will work instead for this instead of all these or's
+
 		if(gameObject.transform.position.x > (targetPosX + 1) || gameObject.transform.position.x < (targetPosX - 1) 
 		   || gameObject.transform.position.z > (targetPosZ + 1) || gameObject.transform.position.z < (targetPosZ - 1)) {
 		// Commenting this loop out as MasterEnemy script is added to all the 5 troops from the scene view
 		// for(int t = 0; t < 5; t++) {
 		// Disabling Vector.Lerp temporarily
-		transform.position = movement;
+
+
+			transform.position = movement;
 			nMoved++;
 			if (allEnemiesHaveMoved () == true) {
+				Debug.Log ("Hi");
 				GameScript.turn = "PlayerTurn";
 				nMoved = 0;			
 			}
@@ -80,6 +86,7 @@ public class MasterEnemyScript : MonoBehaviour {
 	}
 
 	void OnMouseUp() {
+		
 		if (selectedTroop != null) {
 			CheckAttackRange ();
 			if (isWithinAttackRange) {
@@ -88,11 +95,13 @@ public class MasterEnemyScript : MonoBehaviour {
 			}
 		}
 	}
+
 	//This method maps the identifier of a friendly troop (it's name) to it's position
 	//This allows an enemy to determine the closest troop to attack
 	//Later we can add more information to the identifier, to, for example, determine the different between archers and melee
 	public static void addFriendlyPos(string identifier, Vector3 pos) {
 		if (troopPosMap.ContainsKey (identifier) == true) {
+			
 			troopPosMap.Remove (identifier);
 			troopPosMap.Add (identifier, pos);
 		} else {
@@ -155,7 +164,7 @@ public class MasterEnemyScript : MonoBehaviour {
 	private bool allEnemiesHaveMoved() {
 		// Enabling multiple moves per ememy
 		// TODO: fix issue where all enemy units get the same ideal position
-		if (nEnemies * 5 == nMoved) {
+		if (nEnemies == nMoved) {
 			return true;
 		} else {
 			return false;
