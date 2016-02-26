@@ -78,7 +78,6 @@ public class MasterEnemyScript : MonoBehaviour {
 			transform.position = movement;
 			nMoved++;
 			if (allEnemiesHaveMoved () == true) {
-				Debug.Log ("Hi");
 				GameScript.turn = "PlayerTurn";
 				nMoved = 0;			
 			}

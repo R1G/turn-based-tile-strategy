@@ -17,8 +17,10 @@ public class EnemyMelee : MasterEnemyScript {
 		enemyDamage = meleeDmg;
 	}
 
-	/*public override IEnumerator Update() {
-		base.Update ();
+
+	//Not sure exactly what these ISo-and-so things are like IEnumerator down there, but I'll leave it in
+	//I assume it's something complex and special
+	public  void  Update() {
 
 		if (GameScript.turn == "EnemyTurn") {
 
@@ -28,7 +30,8 @@ public class EnemyMelee : MasterEnemyScript {
 						if(hasAttacked == false) {
 							Debug.Log ("Enemy Melee Unit: attacking!");
 							troop = entry.GetComponent<MasterTroopScript>();
-							troop.dmg (meleeDmg);
+							MeleeAttack atk = new MeleeAttack (1, 1, 0);
+							troop.dmg (atk.getDamage ());
 							hasAttacked = true;
 				}
 			}
@@ -37,5 +40,5 @@ public class EnemyMelee : MasterEnemyScript {
 		if (GameScript.turn == "PlayerTurn") 
 			hasAttacked = false;
 	}
-*/
+
 }
