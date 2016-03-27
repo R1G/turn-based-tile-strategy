@@ -135,7 +135,7 @@ public class MasterEnemyScript : MonoBehaviour {
 		int enemyX = (int)gameObject.transform.position.x;
 		int enemyZ = (int)gameObject.transform.position.z;
 
-		List<GameObject> tiles = TileGenerator.getWalkableTilesInRange(enemyX, enemyZ, 1);
+		List<GameObject> tiles = TileGenerator.GetWalkableTilesInRange(enemyX, enemyZ, 1);
 		GameObject tile = getNearestTile(tiles, targetPosX, targetPosZ);
 		return new Vector3 (tile.transform.position.x, 0, tile.transform.position.z);
 	}

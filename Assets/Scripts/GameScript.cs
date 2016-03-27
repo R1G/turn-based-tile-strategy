@@ -4,13 +4,13 @@ using System.Collections;
 public class GameScript : MonoBehaviour {
 
 	static public string turn = "PlayerTurn";
-	public static int playerMoves = 1;
+	public static int playerMoves = 5;
 
 	public static void playerTurn() {
-		playerMoves -= 1;
+		playerMoves--;
 		if (playerMoves == 0) {
 			turn = "EnemyTurn";
-			playerMoves = 1;
+			playerMoves = 5;
 		} 
 	}
 }

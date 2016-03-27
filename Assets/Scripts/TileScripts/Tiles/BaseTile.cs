@@ -6,6 +6,9 @@ public class BaseTile : MonoBehaviour {
 
 	private GameObject selectedTroop;
 	private bool isWithinTravelRange;
+	public int gCost;
+	public int hCost;
+	public GameObject parent;
 
 	void OnMouseUp() {
 		FindSelectedTroop();
@@ -13,7 +16,9 @@ public class BaseTile : MonoBehaviour {
 			CheckRange();
 			if(isWithinTravelRange) {
 				MoveSelectedTroop();
+				selectedTroop.tag = "FriendlyTroop";
 				TileGenerator.unhighlightTiles ();
+			
 			}
 		}
 	}
@@ -23,15 +28,8 @@ public class BaseTile : MonoBehaviour {
 	}
 
 	void CheckRange() {
-		int troopX = (int)selectedTroop.transform.position.x;
-		int troopZ = (int)selectedTroop.transform.position.z;
-
-		int distanceX = Mathf.Abs(troopX - (int)gameObject.transform.position.x);
-		int distanceZ = Mathf.Abs(troopZ - (int)gameObject.transform.position.z);
-
-
-		if (TileGenerator.range >= distanceX + distanceZ) {
-				isWithinTravelRange = true;
+		if (TileGenerator.highlightedTiles.Contains(gameObject)) {
+			isWithinTravelRange = true;
 		}
 	}
 
@@ -44,4 +42,9 @@ public class BaseTile : MonoBehaviour {
 		GameScript.playerTurn ();
 	}
 
+	public int fCost {
+		get { 
+			return hCost + gCost;
+		}
+	}
 }
