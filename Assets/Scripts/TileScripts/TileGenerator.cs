@@ -152,20 +152,32 @@ public class TileGenerator : MonoBehaviour {
 				if (x == 0 && z == 0) {
 					continue;
 				} else if (tilesRef [xPos + x, zPos + z].tag == "walkableTile" && tilesRef [xPos + x, zPos + z] != null) {
-					openTiles.Add (tilesRef [xPos + x, zPos + z]);
-					walkableTiles.Add (tilesRef [xPos + x, zPos + z]);
+					int tileX = (int)tilesRef [xPos + x, zPos + z].transform.position.x;
+					int tileZ = (int)tilesRef [xPos + x, zPos + z].transform.position.z;	
+					//I added this
+					if (tileX  <= 63 && tileZ <= 63 && tileX >= 0 && tileZ >= 0) {
+						openTiles.Add (tilesRef [xPos + x, zPos + z]);
+						walkableTiles.Add (tilesRef [xPos + x, zPos + z]);
+					}
 
 				}
 			} 
 		}
-			for (int t = 0; t < range; t++) {
+		//Hey Rig, after looking at this code for a while (btw, I like what you've done here with checking the walkable tiles), I think I've discovered that week-long bug
+		//I'll see if I can fix it
+
+		//Ok, so I commented out this whole block, and added some if statements to the block above
+		//It seems to have fixed the pathfinding issue with the enemy, but the movement of the friendly troop is now severely limited
+		//Maybe you know a way to fix that?
+
+		/*for (int t = 0; t < range; t++) {
 			foreach (GameObject tile in openTiles.ToArray()) {
-					int tileX = (int)tile.transform.position.x;
-					int tileZ = (int)tile.transform.position.z;
+				int tileX = (int)tile.transform.position.x;
+				int tileZ = (int)tile.transform.position.z;
 					
-					for (int x = -1; x <= 1; x++) {
-						for (int z = -1; z <= 1; z++) {
-							if (x == 0 && z == 0) {
+				for (int x = -1; x <= 1; x++) {
+					for (int z = -1; z <= 1; z++) {
+						if (x == 0 && z == 0) {
 								continue;
 						} if (tileX + x <= 63 && tileZ + z <= 63 && tileX + x >= 0 && tileZ + z >= 0) {
 							if (tilesRef [tileX + x, tileZ + z].tag == "walkableTile" && !openTiles.Contains(tilesRef [tileX + x, tileZ + z])) {
@@ -175,8 +187,10 @@ public class TileGenerator : MonoBehaviour {
 					} 
 				}
 			}
+
 			openTiles = walkableTiles;
-		}
+		}*/
+
 		return walkableTiles;
 	}
 

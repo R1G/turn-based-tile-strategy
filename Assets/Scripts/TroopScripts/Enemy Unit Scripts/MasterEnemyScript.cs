@@ -68,14 +68,16 @@ public class MasterEnemyScript : MonoBehaviour {
 		//The enemy unit will not move if adjacent to it's target's position
 		//Do you think distance() will work instead for this instead of all these or's
 
+		//Yeah, using diatnce() would make a lot more sense. I'll clean that up soon
 		if(gameObject.transform.position.x > (targetPosX + 1) || gameObject.transform.position.x < (targetPosX - 1) 
 		   || gameObject.transform.position.z > (targetPosZ + 1) || gameObject.transform.position.z < (targetPosZ - 1)) {
 		// Commenting this loop out as MasterEnemy script is added to all the 5 troops from the scene view
 		// for(int t = 0; t < 5; t++) {
 		// Disabling Vector.Lerp temporarily
 
-
+			Debug.Log (movement);
 			transform.position = movement;
+
 			nMoved++;
 			if (allEnemiesHaveMoved () == true) {
 				GameScript.turn = "PlayerTurn";
@@ -120,6 +122,9 @@ public class MasterEnemyScript : MonoBehaviour {
 	// Take a list of tiles and determine the one that is walkable AND nearest to the target position
 	private GameObject getNearestTile(List<GameObject> tiles, float targetPosX, float targetPosZ) {
 		GameObject nearestTile = tiles[0];
+		for(int i = 0; i < tiles.Count; i++){
+			Debug.Log (tiles [i].transform.position);
+		}
 		Vector3 targetPos = new Vector3((int) targetPosX, 0, (int) targetPosZ);
 		float distance = Vector3.Distance(nearestTile.transform.position, targetPos);
 		foreach (GameObject tile in tiles) {
@@ -136,8 +141,9 @@ public class MasterEnemyScript : MonoBehaviour {
 		int enemyZ = (int)gameObject.transform.position.z;
 
 		List<GameObject> tiles = TileGenerator.GetWalkableTilesInRange(enemyX, enemyZ, 1);
+
 		GameObject tile = getNearestTile(tiles, targetPosX, targetPosZ);
-		return new Vector3 (tile.transform.position.x, 0, tile.transform.position.z);
+		return new Vector3 (tile.transform.position.x, 1, tile.transform.position.z);
 	}
 
 	private Vector3 findSmallest() {
@@ -170,3 +176,5 @@ public class MasterEnemyScript : MonoBehaviour {
 		}
 	}
 }
+
+

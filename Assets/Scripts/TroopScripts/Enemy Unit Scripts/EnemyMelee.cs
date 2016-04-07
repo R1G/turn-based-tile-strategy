@@ -18,8 +18,8 @@ public class EnemyMelee : MasterEnemyScript {
 	}
 
 
-	//Not sure exactly what these ISo-and-so things are like IEnumerator down there, but I'll leave it in
-	//I assume it's something complex and special
+
+
 	public  void  Update() {
 
 		if (GameScript.turn == "EnemyTurn") {

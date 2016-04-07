@@ -17,7 +17,7 @@ public class MeleeAttack {
 
 	public MeleeAttack(float unitStrength, float weaponAtkValue, float debuffs) {
 
-		//we're probably gonna use more complex 
+		//we're probably gonna use more complex formulas at some point
 		rollFloor += unitStrength;
 		rollCeiling += weaponAtkValue;
 		rollCeiling -= debuffs;
