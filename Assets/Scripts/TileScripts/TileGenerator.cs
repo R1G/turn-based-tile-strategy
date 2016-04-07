@@ -147,8 +147,8 @@ public class TileGenerator : MonoBehaviour {
 		unhighlightTiles ();
 		List<GameObject> openTiles = new List<GameObject> ();
 		List<GameObject> walkableTiles = new List<GameObject> ();
-		for (int x = -1; x <= 1; x++) {
-			for (int z = -1; z <= 1; z++) {
+		for (int x = range*-1; x <= range; x++) {
+			for (int z = range*-1; z <= range; z++) {
 				if (x == 0 && z == 0) {
 					continue;
 				} else if (tilesRef [xPos + x, zPos + z].tag == "walkableTile" && tilesRef [xPos + x, zPos + z] != null) {

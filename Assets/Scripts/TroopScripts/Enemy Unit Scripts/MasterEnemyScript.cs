@@ -122,9 +122,9 @@ public class MasterEnemyScript : MonoBehaviour {
 	// Take a list of tiles and determine the one that is walkable AND nearest to the target position
 	private GameObject getNearestTile(List<GameObject> tiles, float targetPosX, float targetPosZ) {
 		GameObject nearestTile = tiles[0];
-		for(int i = 0; i < tiles.Count; i++){
-			Debug.Log (tiles [i].transform.position);
-		}
+		//for(int i = 0; i < tiles.Count; i++){
+			//Debug.Log (tiles [i].transform.position);
+		//}
 		Vector3 targetPos = new Vector3((int) targetPosX, 0, (int) targetPosZ);
 		float distance = Vector3.Distance(nearestTile.transform.position, targetPos);
 		foreach (GameObject tile in tiles) {
@@ -143,6 +143,8 @@ public class MasterEnemyScript : MonoBehaviour {
 		List<GameObject> tiles = TileGenerator.GetWalkableTilesInRange(enemyX, enemyZ, 1);
 
 		GameObject tile = getNearestTile(tiles, targetPosX, targetPosZ);
+		if (tile.transform.position.x == targetPosX && transform.position.z == targetPosZ)
+			return new Vector3 (0, 0, 0);
 		return new Vector3 (tile.transform.position.x, 1, tile.transform.position.z);
 	}
 
